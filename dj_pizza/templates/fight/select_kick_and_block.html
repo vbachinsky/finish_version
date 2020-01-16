@@ -1,0 +1,28 @@
+{% extends "fight/battlefield.html" %}
+
+{% block content %}
+	<h2> Бой!: </h2>
+	<br>
+
+<p>{{ your_kick|yesno:"Ты нанёс урон противнику, Противник заблокировал твой удар," }}</p>
+<p> Здоровье противника: {{ antagonist.health }}</p>	
+<br>
+<p>{{ your_block|yesno:"Противник нанёс тебе удар, Ты заблокировал удар противника," }}</p>
+<p>	Твоё здоровье: {{ protagonist.health }}</p>
+<br>
+
+{% if game_over %}
+	<h3>{{ you_win|yesno:"Ты победил!, Противник победил!," }}</h3>
+	<p>Начать <a href="{% url 'game' %}">новый бой</a>?</p>
+{% else %}
+	
+	<p>Выберите Ваш удар и блок:</p>
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Выбрать">
+	</form>
+
+{% endif %}
+
+{% endblock content %}

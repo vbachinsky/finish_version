@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Ваша корзина</h2>
+
+<div>
+	{% for pizza in pizzas %}
+		<div>
+			<p> {{ pizza.name }} </p>
+			{% if pizza.image %}
+				<img src="{{ MEDIA_URL }}{{ pizza.image.url }}">
+			{% endif %}
+			<form method = "post" action="/add_pizza/">
+				{% csrf_token %}
+				<input type="text" value="{{ pizza.id }}" hidden name="pizza_id">
+				<input type="number" value="{{ pizza.count }}" name="count">
+				<input type="submit" value="В заказ">
+			</form>
+		</div>
+		<br>
+	{% endfor %}
+</div>
+
+{% endblock %}

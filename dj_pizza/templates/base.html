@@ -1,0 +1,70 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Пиццерия 'У Ашота'!</title>
+
+		{% bootstrap_css %}
+		{% bootstrap_javascript %}
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="{% url 'home' %}">Пиццерия</a>
+				</div>
+				
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="{% url 'game' %}">Игра</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					{% if user.is_authenticated %}
+						<li><a>Здравствуй, {{ user.username|title }}!!!</a></li>
+						<li><a href="{% url 'logout' %}">logout</a></li>
+					{% else %}
+						<li><a>Вы не залогинены</a></li>
+						<li><a href="{% url 'login' %}">login</a></li>
+					{% endif %}
+				</ul>
+			</div>
+			</div>
+		</nav>
+
+		{% block header %}{% endblock header %}
+
+		<div class="container">
+
+			<h2> Welcome to pizza 'У Ашота'!</h2>
+
+				{%if user.is_authenticated %}
+					<p><a href="{% url 'set_shipping' %}">Редактировать учётную запись</a></p>
+					<br>
+					<p><a href="{% url 'add_pizza' %}">Добавить пиццы в корзину</a></p>
+				{% endif %}
+				<p> <a href="{% url 'basket' %}"> Список заказов </a></p>  
+				<br>
+				<p> <a href="{% url 'create_dough' %}"> Добавить корж </a></p>
+				<p> <a href="{% url 'list_dough' %}"> Список коржей </a></p>  
+				<br>
+				<p> <a href="{% url 'create_snacks' %}"> Добавить закуску </a></p>
+				<p> <a href="{% url 'list_snacks' %}"> Список закусок </a></p>  
+				<br>
+				<p> <a href="{% url 'create_topping' %}"> Добавить топпинг </a></p>
+				<p> <a href="{% url 'sorter' %}"> Список топпингов </a></p>  
+				<p><a href="{% url 'common_update' %}">Общее обновление топпингов</a></p>
+
+			{% block content %}{% endblock content %}
+
+		</div>
+
+	</body>
+
+</html>

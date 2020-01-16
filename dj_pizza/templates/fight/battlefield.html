@@ -1,0 +1,29 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>Бойцовский клуб 'У Ашота'!</title>
+
+		{% bootstrap_css %}
+		{% bootstrap_javascript %}
+	</head>
+		
+	<body>		
+		<div class="container">
+
+			<h2> Welcome to fight club 'У Ашота'!</h2>
+				<p> <a href="{% url 'home' %}"> Домой </a></p>
+				<br>
+				<p><a href="{% url 'select_fighter' %}">К бою!!!</a></p>
+			
+			{% block content %}{% endblock content %}
+
+		</div>
+	</body>
+
+</html>
