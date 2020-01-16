@@ -10,3 +10,6 @@ Pillow
 bs4
 lxml
 requests
+celery
+redis
+rq
