@@ -7,6 +7,7 @@ from accounts.models import User
 from django.template import Context, Template
 from django.core.cache import cache
 from dj_pizzas.functions import *
+from .tasks import *
 
 
 class Home(TemplateView):
@@ -51,12 +52,11 @@ class CreateBasket(FormView):
         return context
 
     def form_valid(self, form):
-        pizza = Pizza.objects.get(id=form.cleaned_data.get('pizza_id'))
+        pizza_id = form.cleaned_data.get('pizza_id')
         count = form.cleaned_data.get('count')
-        instance_pizza = pizza.make_order(count)
-        order, created = Order.objects.get_or_create(user=self.request.user)
-        order.pizzas.add(instance_pizza)
-        order.update_price()
+        user = self.request.user._wrapped
+        user_id = user.id
+        add_pizza.delay(count, pizza_id, user_id)
         return super().form_valid(form)
 
 
