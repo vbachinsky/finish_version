@@ -1,13 +1,13 @@
-from django.shortcuts import render
 from .models import *
 from .forms import *
-from django.views.generic.edit import UpdateView, FormView
+from django.views.generic.edit import FormView
+from dj_pizza.celery import *
+
 
 YOUR_BLOCK = None
 YOUR_KICK = None
 GAME_OVER = None
 YOU_WIN = None
-
 
 class WarriorsSelect(FormView):
 	model = Fight
@@ -42,6 +42,7 @@ class FightView(FormView):
 	success_url = '/fight/battle/'
 
 	def get_context_data(self, **kwargs):
+
 		context = super().get_context_data(**kwargs)
 		context['protagonist'] = Fight.objects.get(name='protagonist')
 		context['antagonist'] = Fight.objects.get(name='antagonist')

@@ -16,7 +16,7 @@ router.register(r'order', BasketViewSet)
 
 
 urlpatterns = [
-    path('', cache_page(60*1)(Home.as_view()), name='home'),
+    path('', Home.as_view(), name='home'),
     path('create_topping/', CreateTopping.as_view(), name='create_topping'),
     path('create_snacks/', CreateSnacks.as_view(), name='create_snacks'),
     path('create_dough/', CreateDough.as_view(), name='create_dough'),
