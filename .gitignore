@@ -104,3 +104,7 @@ venv.bak/
 # mypy
 .mypy_cache/
 local_settings.py
+
+*.pid
+*.csv
+*.csv#
