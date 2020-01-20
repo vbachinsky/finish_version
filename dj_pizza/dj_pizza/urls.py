@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('dj_pizzas.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('fight/', include('fight.urls')),
+    path('sales/', include('sales.urls')),
 ]
 
 

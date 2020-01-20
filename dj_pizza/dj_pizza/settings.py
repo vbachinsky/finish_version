@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'rest_framework',
     'fight',
+    'sales',
 ]
 
 REST_FRAMEWORK = {
